@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kahoot Quiz</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+    iframe {
+      border: none;
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+  <iframe id="kahoot-iframe" allowfullscreen allow="autoplay"></iframe>
+
+  <script>
+    fetch("/api/kahoot-url")
+      .then(res => res.text())
+      .then(url => {
+        document.getElementById("kahoot-iframe").src = url;
+      })
+      .catch(err => {
+        document.body.innerHTML = "<h1>Fehler beim Laden des Quiz 😢</h1>";
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
