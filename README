@@ -1,1 +1,3 @@
-
+1.create .env 
+2.add BUTTON_1=Button Name,html file path 
+3. and for following buttons BUTTON_2 BUTTON_3...
