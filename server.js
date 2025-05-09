@@ -5,12 +5,12 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Statische Dateien aus /public bereitstellen
+// Do Not edit under here!!!
 app.use(express.static(path.join(__dirname, "public")));
 
 
 
-// API: Buttons aus .env laden
+
 app.get("/api/buttons", (req, res) => {
   const buttons = Object.entries(process.env)
     .filter(([key]) => key.startsWith("BUTTON_"))
@@ -24,7 +24,7 @@ app.get("/api/buttons", (req, res) => {
   res.json(buttons);
 });
 
-// Index (Startseite)
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
@@ -36,7 +36,7 @@ app.get("/api/poster", (req, res) => {
 });
 
 
-// Server starten
+
 app.listen(PORT, () => {
-  console.log(`✅ Server läuft auf http://localhost:${PORT}`);
+  console.log(`✅ Server is online on http://localhost:${PORT}`);
 });
