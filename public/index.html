@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Startseite</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #fbeaff, #d5f4ff);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    #buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .button {
+      background: white;
+      color: #5a189a;
+      padding: 15px 30px;
+      border-radius: 12px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .button:hover {
+      background: #f0eaff;
+      transform: translateY(-4px);
+      border-color: #b185f0;
+    }
+
+    @media (max-width: 600px) {
+      .button {
+        font-size: 1rem;
+        padding: 12px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Was möchtest du tun?</h1>
+  <div id="buttons"></div>
+
+  <script>
+    fetch("/api/buttons")
+      .then(res => res.json())
+      .then(buttons => {
+        const container = document.getElementById("buttons");
+        buttons.forEach(btn => {
+          const a = document.createElement("a");
+          a.className = "button";
+          a.href = btn.href;
+          a.textContent = btn.text;
+          container.appendChild(a);
+        });
+      })
+      .catch(err => {
+        document.getElementById("buttons").innerHTML =
+          "<p style='color:red;'>Fehler beim Laden der Buttons.</p>";
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
