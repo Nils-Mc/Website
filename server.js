@@ -8,14 +8,7 @@ const PORT = process.env.PORT || 3000;
 // Statische Dateien aus /public bereitstellen
 app.use(express.static(path.join(__dirname, "public")));
 
-// API: Kahoot-Link aus .env
-app.get("/api/kahoot-url", (req, res) => {
-  const url = process.env.KAHOOT_URL;
-  if (!url) {
-    return res.status(500).send("KAHOOT_URL fehlt in .env");
-  }
-  res.send(url);
-});
+
 
 // API: Buttons aus .env laden
 app.get("/api/buttons", (req, res) => {
